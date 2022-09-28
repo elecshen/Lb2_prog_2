@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Lb2_prog_2
 {
-    internal class WordGame
+    internal class WordGame : INotifyPropertyChanged
     {
         private ObservableCollection<char> allowedLetters;
         public ReadOnlyObservableCollection<char> AllowedLetters;
@@ -22,19 +21,30 @@ namespace Lb2_prog_2
         public int Score
         {
             get { return score; }
-            private set { score = value; }
+            private set
+            {
+                score = value;
+                OnPropertyChanged("Score");
+            }
         }
 
         public string Word
         {
             get { return word; }
-            private set { word = value; }
+            private set
+            {
+                word = value;
+                OnPropertyChanged("Word");
+            }
         }
 
         public int PotentialPoints
         {
             get { return potentialPoints; }
-            private set { potentialPoints = value; }
+            private set { 
+                potentialPoints = value;
+                OnPropertyChanged("PotentialPoints");
+            }
         }
 
         public WordGame(ObservableCollection<char> allowedLetters = null, ObservableCollection<int> letterPoints = null)
@@ -59,7 +69,7 @@ namespace Lb2_prog_2
         public void startNewGame(int num)
         {
             clearWord();
-            score = 0;
+            Score = 0;
             wordsHistory.Clear();
 
             setRandomLetters(num);
@@ -80,7 +90,7 @@ namespace Lb2_prog_2
             if(allowedLetters.Contains(letter))
             {
                 Word += letter;
-                potentialPoints += letterPoints[allowedLetters.IndexOf(letter)];
+                PotentialPoints += letterPoints[allowedLetters.IndexOf(letter)];
                 return true;
             }
             return false;
@@ -88,7 +98,7 @@ namespace Lb2_prog_2
 
         private void saveWordAndGetPoints()
         {
-            Score += potentialPoints;
+            Score += PotentialPoints;
             wordsHistory.Add(Word);
             clearWord();
         }
@@ -106,9 +116,16 @@ namespace Lb2_prog_2
 
         public void clearWord()
         {
-            potentialPoints = 0;
+            PotentialPoints = 0;
             Word = "";
             // TODO сделать функцию посчета очков при изменении слова
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
