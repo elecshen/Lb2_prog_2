@@ -47,32 +47,28 @@ namespace Lb2_prog_2
             }
         }
 
-        public WordGame(ObservableCollection<char> allowedLetters = null, ObservableCollection<int> letterPoints = null)
+        public WordGame()
         {
-            if (allowedLetters == null)
-                this.allowedLetters = new ObservableCollection<char>();
-            else
-                this.allowedLetters = allowedLetters;
-            if (letterPoints == null)
-                this.letterPoints = new ObservableCollection<int>();
-            else
-                this.letterPoints = letterPoints;
-            this.word = "";
-            this.potentialPoints = 0;
-            this.wordsHistory = new ObservableCollection<string>();
-            this.score = 0;
+            allowedLetters = new ObservableCollection<char>();
+            letterPoints = new ObservableCollection<int>();
+            word = "";
+            potentialPoints = 0;
+            wordsHistory = new ObservableCollection<string>();
+            score = 0;
             AllowedLetters = new ReadOnlyObservableCollection<char>(this.allowedLetters);
             LetterPoints = new ReadOnlyObservableCollection<int>(this.letterPoints);
             WordsHistory = new ReadOnlyObservableCollection<string>(this.wordsHistory);
         }
 
-        public void startNewGame(int num)
+        public bool startNewGame(int num)
         {
+            if (num < 4 || num > 10) return false; 
             clearWord();
             Score = 0;
             wordsHistory.Clear();
 
             setRandomLetters(num);
+            return true;
         }
 
         private void setRandomLetters(int num)
@@ -118,7 +114,7 @@ namespace Lb2_prog_2
         {
             PotentialPoints = 0;
             Word = "";
-            // TODO сделать функцию посчета очков при изменении слова
+            // TODO функция посчета очков при изменении слова
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
