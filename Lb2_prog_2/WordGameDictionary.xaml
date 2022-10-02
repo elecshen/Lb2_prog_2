@@ -7,22 +7,25 @@
                 <ControlTemplate TargetType="local:LetterButton">
                     <Grid>
                         <Button
-                                x:Name="Button"
-                                Width="70"
-                                Height="70"
-                                Margin="5"
-                                VerticalAlignment="Stretch"
-                                HorizontalAlignment="Stretch"
-                                FontSize="30"
-                                Content="{TemplateBinding Content}">
+                            x:Name="Button"
+                            Width="70"
+                            Height="70"
+                            Margin="5"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            FontSize="30"
+                            Content="{TemplateBinding Content}"
+                            Command="{TemplateBinding Command}"
+                            CommandParameter="{TemplateBinding IdData}">
                         </Button>
                         <TextBlock
-                                x:Name="TextBlock"
-                                VerticalAlignment="Bottom"
-                                HorizontalAlignment="Right"
-                                Margin="10,5"
-                                FontSize="16"
-                                Text="{TemplateBinding SecondaryContent}">
+                            x:Name="TextBlock"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Right"
+                            Margin="10,5"
+                            FontSize="16"
+                            Text="{TemplateBinding SecondaryContent}"
+                            IsHitTestVisible="False">
                         </TextBlock>
                     </Grid>
                 </ControlTemplate>

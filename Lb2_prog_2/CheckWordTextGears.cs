@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Lb2_prog_2
@@ -15,7 +11,7 @@ namespace Lb2_prog_2
         public static async Task<bool> CheckWord(string word, string apiKey)
         {
             bool isWord = false;
-            WebRequest request = WebRequest.Create(url + "key=" + apiKey + "&language=ru-RU&text=" + word);
+            WebRequest request = WebRequest.Create(url + "key=" + apiKey + "&language=ru-RU&text=" + word.ToLower());
             WebResponse response = await request.GetResponseAsync();
             using (Stream stream = response.GetResponseStream())
             {

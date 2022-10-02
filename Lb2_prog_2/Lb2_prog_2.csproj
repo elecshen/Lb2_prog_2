@@ -56,8 +56,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CheckWordTextGears.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="LetterButton.cs" />
     <Compile Include="WordGame.cs" />
+    <Compile Include="WordGameVM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -29,6 +29,7 @@ namespace Lb2_prog_2
         {
             var jsonStr = CheckWordTextGears.CheckWord("привет", "b1D2VhZMMzRyD4bF");
             MessageBox.Show((await jsonStr).ToString());
+            
         }
     }
 }
