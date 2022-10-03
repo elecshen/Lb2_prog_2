@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Lb2_prog_2
@@ -14,8 +7,7 @@ namespace Lb2_prog_2
     internal class WordGameVM : INotifyPropertyChanged
     {
         private WordGame game;
-        public WordGame Game => game;
-        public ReadOnlyObservableCollection<WordGame.Letter> Letters { get { return game.Letters; } }
+        public WordGame Game { get { return game; } }
 
         public WordGameVM()
         {
@@ -61,7 +53,8 @@ namespace Lb2_prog_2
                 return checkCommand ??
                     (checkCommand = new Command(async obj =>
                     {
-                        await game.CheckWord(CheckWordTextGears.CheckWord, "b1D2VhZMMzRyD4bF");
+                        if (!await game.CheckWord(CheckWordTextGears.CheckWord, "b1D2VhZMMzRyD4bF"))
+                            MessageBox.Show("Введите другое значение", "Некорректный ввод");
                     }));
             }
         }

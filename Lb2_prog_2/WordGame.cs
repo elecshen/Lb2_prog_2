@@ -12,6 +12,7 @@ namespace Lb2_prog_2
     {
         public struct Letter
         {
+            // Структура для более удобного хранения информации о содержимом кнопки
             public Letter(int i, string l, int p)
             {
                 id = i;
@@ -25,13 +26,20 @@ namespace Lb2_prog_2
             public bool isNotPressed { get; set; }
         }
 
+        // Баллы для каждого символа алфавита
+        // Необходимо для присвоения одинаковым буквам одинаковых баллов
         private int[] letterPoints;
+        // Список символов достыхных для набора слова
         private ObservableCollection<Letter> letters;
         public ReadOnlyObservableCollection<Letter> Letters { get; }
+        // Список введённых слов, которые прошли проверку
         private ObservableCollection<string> wordsHistory;
         public ReadOnlyObservableCollection<string> WordsHistory { get; }
+        // Текущее набираемое слово
         private string word;
+        // Сумма очков которые можно получить, если слово пройдёт проверку
         private int potentialPoints;
+        // Очки за все корректно введёные слова
         private int score;
 
         public int Score
@@ -86,6 +94,7 @@ namespace Lb2_prog_2
             return true;
         }
 
+        // Установка баллов за символ и списка доступных для ввода символов
         private void SetRandomLetters(int num)
         {
             letters.Clear();
@@ -126,7 +135,7 @@ namespace Lb2_prog_2
 
         public async Task<bool> CheckWord(Func<string, string, Task<bool>> checkFunc, string apiKey)
         {
-            if(await checkFunc(Word, apiKey))
+            if(!wordsHistory.Contains(word) && await checkFunc(Word, apiKey))
             {
                 SaveWordAndGetPoints();
                 return true;
@@ -139,7 +148,7 @@ namespace Lb2_prog_2
         {
             PotentialPoints = 0;
             Word = "";
-            for(int i =0; i < letters.Count; i++)
+            for (int i = 0; i < letters.Count; i++)
             {
                 Letter letter = letters[i];
                 letter.isNotPressed = true;

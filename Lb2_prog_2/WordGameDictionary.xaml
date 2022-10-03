@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Lb2_prog_2">
+    <!-- Стиль\шаблон для кнопки символа -->
     <Style TargetType="local:LetterButton">
         <Setter Property="Template">
             <Setter.Value>

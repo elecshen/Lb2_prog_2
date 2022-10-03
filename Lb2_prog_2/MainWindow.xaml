@@ -8,9 +8,11 @@
         Title="MainWindow" Height="470" Width="916" MinHeight="470" MinWidth="916"
         x:Name="mnm">
     <Window.DataContext>
+        <!-- Определения контекста данных.(Какой класс будет источником данных для view -->
         <local:WordGameVM/>
     </Window.DataContext>
     <Window.Resources>
+        <!-- Подключение описания кнопки символа -->
         <ResourceDictionary Source="WordGameDictionary.xaml"/>
     </Window.Resources>
     <Grid Margin="0,0,0,6">
@@ -63,7 +65,7 @@
                 <Label HorizontalAlignment="Stretch" Margin="0, 0, 15, 0" Content="{Binding Game.Word}" FontSize="24" BorderBrush="Gray" BorderThickness="1"/>
                 <Button Grid.Column="1" Content="Очистить" Command="{Binding ClearCommand}" FontSize="18"/>
             </Grid>
-            <ItemsControl Grid.Row="1" Margin="5,0" x:Name="nnnn" ItemsSource="{Binding Letters}">
+            <ItemsControl Grid.Row="1" Margin="5,0" x:Name="nnnn" ItemsSource="{Binding Game.Letters}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>

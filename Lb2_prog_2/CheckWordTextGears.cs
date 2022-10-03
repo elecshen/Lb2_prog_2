@@ -8,6 +8,7 @@ namespace Lb2_prog_2
     {
         private static readonly string url = "https://api.textgears.com/spelling?";
 
+        // Функция сравнения содержимого строки с содержимым словаря посредством GET запроса
         public static async Task<bool> CheckWord(string word, string apiKey)
         {
             bool isWord = false;
@@ -17,6 +18,8 @@ namespace Lb2_prog_2
             {
                 using (StreamReader reader = new StreamReader(stream))
                 {
+                    // id присваетвается найденым ошибкам\корретировкам
+                    // если слово написано правильно поле id рисутствовать не будет
                     if(!reader.ReadToEnd().Contains("id"))
                         isWord = true;
                 }
