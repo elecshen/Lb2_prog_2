@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lb2_prog_2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="470" Width="916" MinHeight="470" MinWidth="916"
-        x:Name="mnm">
+        Title="MainWindow" Height="470" Width="936" MinHeight="470" MinWidth="936">
     <Window.DataContext>
         <!-- Определения контекста данных.(Какой класс будет источником данных для view -->
         <local:WordGameVM/>
@@ -46,7 +45,7 @@
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="Количество символов:" Margin="0,0,5,0" FontSize="16"></Label>
-                <TextBox Grid.Column="1" x:Name="num" Width="50" Margin="0, 0, 15, 0" FontSize="18" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" x:Name="num" Width="50" Margin="0, 0, 15, 0" FontSize="18" VerticalAlignment="Center" Text="24"/>
                 <Button Grid.Column="2" Content="Начать новую игру" Command="{Binding StartNewGameCommand}" CommandParameter="{Binding ElementName=num, Path=Text}" FontSize="16"/>
             </Grid>
         </Grid>
@@ -65,18 +64,20 @@
                 <Label HorizontalAlignment="Stretch" Margin="0, 0, 15, 0" Content="{Binding Game.Word}" FontSize="24" BorderBrush="Gray" BorderThickness="1"/>
                 <Button Grid.Column="1" Content="Очистить" Command="{Binding ClearCommand}" FontSize="18"/>
             </Grid>
-            <ItemsControl Grid.Row="1" Margin="5,0" x:Name="nnnn" ItemsSource="{Binding Game.Letters}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <local:LetterButton IdData="{Binding Path=id}" Content="{Binding Path=letter}" SecondaryContent="{Binding Path=points}" IsEnabled="{Binding Path=isNotPressed}" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.LetterCommand}"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <ItemsControl Margin="5,0" ItemsSource="{Binding Game.Letters}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:LetterButton IdData="{Binding Path=id}" Content="{Binding Path=letter}" SecondaryContent="{Binding Path=points}" IsEnabled="{Binding Path=isNotPressed}" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.LetterCommand}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
             <Button Grid.Row="2" Content="Проверить" HorizontalAlignment="Right" Margin="0,5,10,0" FontSize="20" Command="{Binding CheckCommand}"/>
         </Grid>
     </Grid>

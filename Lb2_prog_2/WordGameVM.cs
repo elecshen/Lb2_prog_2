@@ -12,7 +12,7 @@ namespace Lb2_prog_2
         public WordGameVM()
         {
             game = new WordGame();
-            game.StartNewGame(7);
+            game.StartNewGame(24);
         }
 
         private Command startNewGameCommand;

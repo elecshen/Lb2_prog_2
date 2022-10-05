@@ -26,6 +26,8 @@ namespace Lb2_prog_2
             public bool isNotPressed { get; set; }
         }
 
+        readonly string ABC = "АЕЁИОУЫЭЮЯБВГДЖЗЙКЛМНПРСТФХЦЧШЩЪЬ";
+
         // Баллы для каждого символа алфавита
         // Необходимо для присвоения одинаковым буквам одинаковых баллов
         private int[] letterPoints;
@@ -73,7 +75,7 @@ namespace Lb2_prog_2
 
         public WordGame()
         {
-            letterPoints = new int[33];
+            letterPoints = new int[ABC.Length];
             word = "";
             potentialPoints = 0;
             score = 0;
@@ -95,6 +97,22 @@ namespace Lb2_prog_2
         }
 
         // Установка баллов за символ и списка доступных для ввода символов
+        private void SetRandomLettersV1(int num)
+        {
+            letters.Clear();
+            Random random = new Random();
+            for (int i = 0; i < letterPoints.Length; i++)
+            {
+                letterPoints[i] = random.Next(1, 10);
+            }
+            int c;
+            for (int i = 0; i < num; i++)
+            {
+                c = random.Next(ABC.Length);
+                letters.Add(new Letter(i, ((char)('А' + c)).ToString(), letterPoints[c]));
+            }
+        }
+
         private void SetRandomLetters(int num)
         {
             letters.Clear();
@@ -106,9 +124,8 @@ namespace Lb2_prog_2
             int c;
             for (int i = 0; i < num; i++)
             {
-                c = random.Next(33);
-                letters.Add(new Letter(i, ((char)('А' + c)).ToString(), letterPoints[c]));
-                Console.WriteLine(letters[i].letter);
+                c = (c = random.Next(ABC.Length+10)) > 19 ? c - 10 : c / 2;
+                letters.Add(new Letter(i, ABC[c].ToString(), letterPoints[c]));
             }
         }
 
