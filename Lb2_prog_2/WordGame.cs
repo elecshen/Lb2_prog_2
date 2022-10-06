@@ -97,22 +97,6 @@ namespace Lb2_prog_2
         }
 
         // Установка баллов за символ и списка доступных для ввода символов
-        private void SetRandomLettersV1(int num)
-        {
-            letters.Clear();
-            Random random = new Random();
-            for (int i = 0; i < letterPoints.Length; i++)
-            {
-                letterPoints[i] = random.Next(1, 10);
-            }
-            int c;
-            for (int i = 0; i < num; i++)
-            {
-                c = random.Next(ABC.Length);
-                letters.Add(new Letter(i, ((char)('А' + c)).ToString(), letterPoints[c]));
-            }
-        }
-
         private void SetRandomLetters(int num)
         {
             letters.Clear();
